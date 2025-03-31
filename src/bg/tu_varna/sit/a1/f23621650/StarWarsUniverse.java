@@ -46,7 +46,7 @@ public class StarWarsUniverse {
         }
         else
         {
-            System.out.println("Jedi creation wasn't successful. There is already a jedi with this name on this or another planet.");
+            System.out.println("Jedi creation wasn't successful. There is already a jedi with this name on this or another planet.");//Check if the jedi appears in other planets?
         }
     }// when is the jedi gonna be initialised from the command line arguments?
 
@@ -65,11 +65,10 @@ public class StarWarsUniverse {
         else
         {
             System.out.println("There is no such jedi on this planet!");
-
         }
-        /*for(Planet planet: planets)
+        /*for(Planet planet: planets) (this is here in case i decide to use arraylist again)
         {
-            if(planet.getName() == planetName)
+            if(planet.getName().equals(planetName))
             {
                 planet.removeJedi(jediName);
                 break;
