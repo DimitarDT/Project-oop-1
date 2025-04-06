@@ -2,6 +2,7 @@ package bg.tu_varna.sit.a1.f23621650;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Planet {
     private String name;
@@ -18,14 +19,13 @@ public class Planet {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false; //getclass or getinstance?
-        Planet planet = (Planet) o;
-        return name.equals(planet.name);
+        if (!(o instanceof Planet planet)) return false;
+        return Objects.equals(name, planet.name);
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode(); //Objects version 1.7??
+        return Objects.hashCode(name);
     }
 
     public boolean addJedi(Jedi jedi)

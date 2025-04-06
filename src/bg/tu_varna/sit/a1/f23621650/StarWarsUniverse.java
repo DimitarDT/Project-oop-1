@@ -1,8 +1,6 @@
 package bg.tu_varna.sit.a1.f23621650;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class StarWarsUniverse {
@@ -18,7 +16,7 @@ public class StarWarsUniverse {
         return starWarsUniverse;
     }
 
-    Map<String, Planet> planets = new HashMap<String, Planet>(); // is it okay for this to be placed here?
+    Map<String, Planet> planets = new HashMap<>(); // is it okay for this to be placed here?
 
     public void addPlanet(String planetName)
     {
@@ -48,7 +46,7 @@ public class StarWarsUniverse {
         {
             System.out.println("Jedi creation wasn't successful. There is already a jedi with this name on this or another planet.");//Check if the jedi appears in other planets?
         }
-    }// when is the jedi gonna be initialised from the command line arguments?
+    }// when is the jedi going to be initialised from the command line arguments?
 
     public void removeJediFromPlanet(String jediName, String planetName)
     {
@@ -66,7 +64,7 @@ public class StarWarsUniverse {
         {
             System.out.println("There is no such jedi on this planet!");
         }
-        /*for(Planet planet: planets) (this is here in case i decide to use arraylist again)
+        /*for(Planet planet: planets) (this is here in case I decide to use arraylist again)
         {
             if(planet.getName().equals(planetName))
             {
