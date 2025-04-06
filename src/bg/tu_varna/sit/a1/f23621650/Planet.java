@@ -1,13 +1,11 @@
 package bg.tu_varna.sit.a1.f23621650;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Planet {
     private String name;
-    private Set<Jedi> jediSet = new HashSet<Jedi>();
+    private List<Jedi> jediList = new ArrayList<Jedi>();
 
     public String getName() {
         return name;
@@ -32,16 +30,25 @@ public class Planet {
 
     public boolean addJedi(Jedi jedi)
     {
-        return jediSet.add(jedi);
+        for(Jedi jedi1: jediList)
+        {
+            if(jedi.getJediName().equals(jedi1.getJediName()))
+            {
+                return false;
+            }
+        }
+        jediList.add(jedi);
+        return true;
     }
 
     public boolean removeJedi(String name)
     {
-        for(Jedi jedi: jediSet)
+        for(Jedi jedi: jediList)
         {
             if(jedi.getJediName().equals(name))
             {
-                return jediSet.remove(jedi);
+                jediList.remove(jedi);//this returns a bool type
+                return true;
             }
         }
         return false;
