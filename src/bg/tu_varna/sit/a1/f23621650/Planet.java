@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Planet {
     private String name;
-    private List<Jedi> jediList = new ArrayList<Jedi>();
+    private List<Jedi> jediList = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -47,8 +47,7 @@ public class Planet {
         {
             if(jedi.getJediName().equals(name))
             {
-                jediList.remove(jedi);//this returns a bool type
-                return true;
+                return jediList.remove(jedi);
             }
         }
         return false;
