@@ -22,17 +22,19 @@ public class JediManager {
 
     public Jedi getJedi(String jediName)
     {
+        if(!jedis.containsKey(jediName))
+            throw new JediManagementException("Jedi doesn't exist anywhere!");
         return jedis.get(jediName);
     }
 
-    public void removeJedi(Jedi jedi, Planet planet) //Jedi jedi or String jediName???
+    public void removeJedi(String jediName, Planet planet)
     {
-        if(!planet.getJediMap().containsKey(jedi.getJediName()))
+        if(!planet.getJediMap().containsKey(jediName))
         {
             throw new JediManagementException("There is no such jedi on this planet!");
         }
-        jedis.remove(jedi.getJediName());
-        planet.getJediMap().remove(jedi.getJediName());
+        jedis.remove(jediName);
+        planet.getJediMap().remove(jediName);
         System.out.println("Jedi was removed.");
     }
 }

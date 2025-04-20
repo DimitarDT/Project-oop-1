@@ -37,7 +37,7 @@ public class StarWarsUniverse {
             throw new PlanetManagementException("Jedi creation wasn't successful. There is no such planet.");
         }
         jediManager.addJedi(jedi, planets.get(planetName));
-    }// when is the jedi going to be initialised from the command line arguments?
+    }
 
     public void removeJediFromPlanet(String jediName, String planetName)
     {
@@ -45,7 +45,6 @@ public class StarWarsUniverse {
         {
             throw new PlanetManagementException("Jedi removal wasn't successful. There is no such planet.");
         }
-        jediManager.removeJedi(jediManager.getJedi(jediName), planets.get(planetName));
-
-    }//add message for no such jedi/planet exists
+        jediManager.removeJedi(jediName, planets.get(planetName));
+    }
 }
