@@ -1,15 +1,20 @@
 package bg.tu_varna.sit.a1.f23621650;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
 public class Planet {
     private String name;
-    private List<Jedi> jediList = new ArrayList<>();
+    private HashMap<String, Jedi> jediMap = new HashMap<>();
 
     public String getName() {
         return name;
+    }
+
+    public HashMap<String, Jedi> getJediMap() {
+        return jediMap;
     }
 
     public Planet(String name) {
@@ -26,30 +31,5 @@ public class Planet {
     @Override
     public int hashCode() {
         return Objects.hashCode(name);
-    }
-
-    public boolean addJedi(Jedi jedi)
-    {
-        for(Jedi jedi1: jediList)
-        {
-            if(jedi.getJediName().equals(jedi1.getJediName()))
-            {
-                return false;
-            }
-        }
-        jediList.add(jedi);
-        return true;
-    }
-
-    public boolean removeJedi(String name)
-    {
-        for(Jedi jedi: jediList)
-        {
-            if(jedi.getJediName().equals(name))
-            {
-                return jediList.remove(jedi);
-            }
-        }
-        return false;
     }
 }

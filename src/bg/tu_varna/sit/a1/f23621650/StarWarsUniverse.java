@@ -6,8 +6,10 @@ import java.util.Map;
 public class StarWarsUniverse {
     //Singleton implementation
     private static StarWarsUniverse starWarsUniverse;
-    private StarWarsUniverse(){}
-    public StarWarsUniverse getInstance()
+    private StarWarsUniverse(){
+        jediManager = new JediManager();
+    }
+    public static StarWarsUniverse getInstance()
     {
         if(starWarsUniverse == null)
         {
@@ -17,60 +19,33 @@ public class StarWarsUniverse {
     }
 
     Map<String, Planet> planets = new HashMap<>(); // is it okay for this to be placed here?
+    private JediManager jediManager;//static?
 
     public void addPlanet(String planetName)
     {
         if(planets.containsKey(planetName))
         {
-            System.out.println("This planet already exists!");
+            throw new PlanetManagementException(planetName + " already exists!");
         }
-        else
-        {
-            planets.put(planetName, new Planet(planetName));
-        }
+        planets.put(planetName, new Planet(planetName));
     }
 
-    public void addJediToPlanet(String planetName, String jediName, JediRank jediRank, int age, String lightsaberColor, double strength)
+    public void addJediToPlanet(String planetName, Jedi jedi)
     {
         if(!(planets.containsKey(planetName)))
         {
-            System.out.println("Jedi creation wasn't successful. There is no such planet.");
-            return;
+            throw new PlanetManagementException("Jedi creation wasn't successful. There is no such planet.");
         }
-
-        if(planets.get(planetName).addJedi(new Jedi(jediName, jediRank, age, lightsaberColor, strength))) //a lot of arguments are being repeated here
-        {
-            System.out.println("Jedi creation was successful.");
-        }
-        else
-        {
-            System.out.println("Jedi creation wasn't successful. There is already a jedi with this name on this or another planet.");//Check if the jedi appears in other planets?
-        }
+        jediManager.addJedi(jedi, planets.get(planetName));
     }// when is the jedi going to be initialised from the command line arguments?
 
     public void removeJediFromPlanet(String jediName, String planetName)
     {
         if(!(planets.containsKey(planetName)))
         {
-            System.out.println("Jedi removal wasn't successful. There is no such planet.");
-            return;
+            throw new PlanetManagementException("Jedi removal wasn't successful. There is no such planet.");
         }
+        jediManager.removeJedi(jediManager.getJedi(jediName), planets.get(planetName));
 
-        if(planets.get(planetName).removeJedi(jediName))
-        {
-            System.out.println("Jedi was removed.");
-        }
-        else
-        {
-            System.out.println("There is no such jedi on this planet!");
-        }
-        /*for(Planet planet: planets) (this is here in case I decide to use arraylist again)
-        {
-            if(planet.getName().equals(planetName))
-            {
-                planet.removeJedi(jediName);
-                break;
-            }
-        }*/
     }//add message for no such jedi/planet exists
 }

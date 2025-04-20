@@ -8,6 +8,7 @@ public class Jedi {
     private int age;
     private String lightsaberColor;
     private double strength;
+    private String planetName;
 
     public String getJediName() {
         return jediName;
