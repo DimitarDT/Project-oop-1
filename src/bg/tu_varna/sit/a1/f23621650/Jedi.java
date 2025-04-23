@@ -14,6 +14,22 @@ public class Jedi {
         return jediName;
     }
 
+    public JediRank getJediRank() {
+        return jediRank;
+    }
+
+    public void setJediRank(JediRank jediRank) {
+        this.jediRank = jediRank;
+    }
+
+    public double getStrength() {
+        return strength;
+    }
+
+    public void setStrength(double strength) {
+        this.strength = strength;
+    }
+
     public Jedi(String jediName, JediRank jediRank, int age, String lightsaberColor, double strength) {
         this.jediName = jediName;
         this.jediRank = jediRank;
