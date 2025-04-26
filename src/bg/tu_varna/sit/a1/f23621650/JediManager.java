@@ -9,12 +9,12 @@ public class JediManager {
         jedis = new HashMap<>();
     }
 
-    public void addJedi(Jedi jedi, Planet planet) {
+    public void addJedi(Jedi jedi) {
         if(jedis.containsKey(jedi.getJediName()))
             throw new JediManagementException("Jedi " + jedi.getJediName() + " already exists on this or another planet!");
 
         jedis.put(jedi.getJediName(), jedi);
-        planet.getJediMap().put(jedi.getJediName(), jedi);
+        jedi.getPlanet().getJediMap().put(jedi.getJediName(), jedi);//???
         System.out.println("Jedi creation was successful.");
     }
 
@@ -25,7 +25,7 @@ public class JediManager {
     }
 
     public void removeJedi(String jediName, Planet planet) {
-        if(!planet.getJediMap().containsKey(jediName))//rework jedimap
+        if(!planet.getJediMap().containsKey(jediName))//rework jedimap//???
         {
             throw new JediManagementException("There is no such jedi on this planet!");
         }

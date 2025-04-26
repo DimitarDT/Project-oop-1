@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-public class Planet {
-    private String name;
-    private HashMap<String, Jedi> jediMap = new HashMap<>();
+public class Planet { // целият клас е под въпрос, има ли смисъл от него?
+    private String name;// do we need the name in here?
+    private HashMap<String, Jedi> jediMap = new HashMap<>();//do we need the jedis here
 
     public String getName() {
         return name;

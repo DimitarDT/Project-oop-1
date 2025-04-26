@@ -8,7 +8,7 @@ public class Jedi {
     private int age;
     private String lightsaberColor;
     private double strength;
-    private String planetName;
+    private Planet planet;
 
     public String getJediName() {
         return jediName;
@@ -30,12 +30,17 @@ public class Jedi {
         this.strength = strength;
     }
 
-    public Jedi(String jediName, JediRank jediRank, int age, String lightsaberColor, double strength) {
+    public Planet getPlanet() {
+        return planet;
+    }
+
+    public Jedi(String jediName, JediRank jediRank, int age, String lightsaberColor, double strength, Planet planet) {
         this.jediName = jediName;
         this.jediRank = jediRank;
         this.age = age;
         this.lightsaberColor = lightsaberColor;
         this.strength = strength;
+        this.planet = planet;
     }
 
     //Objects version 1.7?? Also, should there be non-null fields? Which fields should be included to ensure every jedi is unique?

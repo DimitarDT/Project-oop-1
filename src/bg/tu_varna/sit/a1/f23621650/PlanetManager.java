@@ -21,4 +21,8 @@ public class PlanetManager {
     public Planet getPlanet(String planetName) {
         return planets.get(planetName);
     }
+
+    public boolean containsPlanet(String planetName) {
+        return planets.containsKey(planetName);
+    }
 }
