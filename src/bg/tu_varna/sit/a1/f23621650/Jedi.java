@@ -30,6 +30,10 @@ public class Jedi {
         this.strength = strength;
     }
 
+    public int getAge() {
+        return age;
+    }
+
     public Planet getPlanet() {
         return planet;
     }

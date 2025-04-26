@@ -49,4 +49,14 @@ public class StarWarsUniverse {
         jediManager.demoteJedi(jediName, multiplier);
     }
 
+    public Jedi getStrongestJedi(String planetName) {
+        if(!(planetManager.containsPlanet(planetName))) {
+            throw new PlanetManagementException("Operation wasn't successful. There is no such planet.");
+        }
+        return jediManager.getStrongestJedi(planetManager.getPlanet(planetName)); //printJedi()
+    }
+
+    public Jedi getYoungestJedi(String planetName, JediRank jediRank) {
+        return jediManager.getYoungestJedi(planetManager.getPlanet(planetName), jediRank); //printJedi()
+    }
 }
