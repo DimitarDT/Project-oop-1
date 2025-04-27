@@ -34,6 +34,10 @@ public class Jedi {
         return age;
     }
 
+    public String getLightsaberColor() {
+        return lightsaberColor;
+    }
+
     public Planet getPlanet() {
         return planet;
     }

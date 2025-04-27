@@ -59,4 +59,12 @@ public class StarWarsUniverse {
     public Jedi getYoungestJedi(String planetName, JediRank jediRank) {
         return jediManager.getYoungestJedi(planetManager.getPlanet(planetName), jediRank); //printJedi()
     }
+
+    public void getMostUsedSaberColor(String planetName, JediRank jediRank) {
+        System.out.println("Most used saber color is: " + jediManager.getMostUsedSaberColor(planetManager.getPlanet(planetName), jediRank));
+    }
+
+    public void getMostUsedSaberColor(String planetName) {
+        System.out.println("Most used saber color of grandmasters on " + planetName + " is: " + jediManager.getMostUsedSaberColor(planetManager.getPlanet(planetName), JediRank.GRAND_MASTER));
+    }
 }
