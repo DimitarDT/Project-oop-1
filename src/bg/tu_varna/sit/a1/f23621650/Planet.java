@@ -21,6 +21,18 @@ public class Planet { // целият клас е под въпрос, има л
         this.name = name;
     }
 
+    //public void addToPlanet(Jedi jedi) for encapsulation
+    //printPlanet here
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Planet{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", jediMap=").append(jediMap);
+        sb.append('}');
+        return sb.toString();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -61,10 +61,10 @@ public class StarWarsUniverse {
     }
 
     public void getMostUsedSaberColor(String planetName, JediRank jediRank) {
-        System.out.println("Most used saber color is: " + jediManager.getMostUsedSaberColor(planetManager.getPlanet(planetName), jediRank));
+        System.out.println("Most used saber color is: " + planetManager.getMostUsedSaberColor(planetName, jediRank));
     }
 
     public void getMostUsedSaberColor(String planetName) {
-        System.out.println("Most used saber color of grandmasters on " + planetName + " is: " + jediManager.getMostUsedSaberColor(planetManager.getPlanet(planetName), JediRank.GRAND_MASTER));
+        System.out.println("Most used saber color of grandmasters on " + planetName + " is: " + planetManager.getMostUsedSaberColor(planetName, JediRank.GRAND_MASTER));
     }
 }

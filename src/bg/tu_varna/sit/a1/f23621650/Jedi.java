@@ -51,6 +51,18 @@ public class Jedi {
         this.planet = planet;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("The jedi ");
+        sb.append("jediName='").append(jediName).append('\'');
+        sb.append(", jediRank=").append(jediRank);
+        sb.append(", age=").append(age);
+        sb.append(", lightsaberColor='").append(lightsaberColor).append('\'');
+        sb.append(", strength=").append(strength);
+        sb.append(", planet=").append(planet);
+        sb.append('}');
+        return sb.toString();
+    }
     //Objects version 1.7?? Also, should there be non-null fields? Which fields should be included to ensure every jedi is unique?
     //this uses the intellij default methods
 
