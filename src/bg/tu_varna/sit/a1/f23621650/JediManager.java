@@ -73,7 +73,6 @@ public class JediManager {
         if(planet.getJediMap().isEmpty()) {//???
             throw new JediManagementException("There are no jedis on this planet!");
         }
-        return Collections.min(planet.getJediMap().values(), Comparator.comparingInt(Jedi::getAge).thenComparing(Jedi::getJediName));//???
+        return planet.getJediMap().values().stream().filter(j -> j.getJediRank() == jediRank).min(Comparator.comparing(Jedi::getJediName)).orElse(null);
     }
-
 }

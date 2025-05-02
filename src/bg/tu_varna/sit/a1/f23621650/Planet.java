@@ -1,9 +1,6 @@
 package bg.tu_varna.sit.a1.f23621650;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Planet { // целият клас е под въпрос, има ли смисъл от него?
     private String name;// do we need the name in here?
@@ -23,12 +20,19 @@ public class Planet { // целият клас е под въпрос, има л
 
     //public void addToPlanet(Jedi jedi) for encapsulation
     //printPlanet here
+    public List<Jedi> getJedis(Planet planet) {
+        List<Jedi> allJedis = new ArrayList<>(this.jediMap.values());
+        allJedis.addAll(planet.jediMap.values());
+        return allJedis;
+    }
 
     @Override
     public String toString() {
+        List<Jedi> jediList = new ArrayList<>(jediMap.values());
+        jediList.sort(Comparator.comparing(Jedi::getJediRank).thenComparing(Jedi::getJediName));
         final StringBuilder sb = new StringBuilder("Planet{");
         sb.append("name='").append(name).append('\'');
-        sb.append(", jediMap=").append(jediMap);
+        sb.append(", jedis=").append(jediList);
         sb.append('}');
         return sb.toString();
     }

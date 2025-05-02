@@ -47,7 +47,7 @@ public class Jedi {
         this.jediRank = jediRank;
         this.age = age;
         this.lightsaberColor = lightsaberColor;
-        this.strength = strength;
+        this.strength = strength;//throw exception if out of bounds
         this.planet = planet;
     }
 
@@ -59,8 +59,8 @@ public class Jedi {
         sb.append(", age=").append(age);
         sb.append(", lightsaberColor='").append(lightsaberColor).append('\'');
         sb.append(", strength=").append(strength);
-        sb.append(", planet=").append(planet);
-        sb.append('}');
+        sb.append(", planet=").append(planet.getName());
+        sb.append("}\n");
         return sb.toString();
     }
     //Objects version 1.7?? Also, should there be non-null fields? Which fields should be included to ensure every jedi is unique?

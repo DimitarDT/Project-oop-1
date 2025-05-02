@@ -1,7 +1,6 @@
 package bg.tu_varna.sit.a1.f23621650;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class PlanetManager {
     private Map<String, Planet> planets;
@@ -50,5 +49,17 @@ public class PlanetManager {
             }
         }
         return mostUsedColor;
+    }
+
+    public String printTwoPlanets(String firstPlanetName, String secondPlanetName) {
+        Planet firstPlanet = getPlanet(firstPlanetName);
+        Planet secondPlanet = getPlanet(secondPlanetName);
+        List<Jedi> allJedis = firstPlanet.getJedis(secondPlanet);
+        allJedis.sort(Comparator.comparing(Jedi::getJediName));
+        final StringBuilder sb = new StringBuilder("Jedis on planets ").append(firstPlanetName).append(" and ").append(secondPlanetName).append(":\n");
+        for(Jedi jedi : allJedis) {
+            sb.append(jedi.toString());
+        }
+        return sb.toString();
     }
 }

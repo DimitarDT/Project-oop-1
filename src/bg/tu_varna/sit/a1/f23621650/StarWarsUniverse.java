@@ -49,15 +49,18 @@ public class StarWarsUniverse {
         jediManager.demoteJedi(jediName, multiplier);
     }
 
-    public Jedi getStrongestJedi(String planetName) {
+    public void getStrongestJedi(String planetName) {
         if(!(planetManager.containsPlanet(planetName))) {
             throw new PlanetManagementException("Operation wasn't successful. There is no such planet.");
         }
-        return jediManager.getStrongestJedi(planetManager.getPlanet(planetName)); //printJedi()
+        System.out.println(jediManager.getStrongestJedi(planetManager.getPlanet(planetName)).toString());
     }
 
-    public Jedi getYoungestJedi(String planetName, JediRank jediRank) {
-        return jediManager.getYoungestJedi(planetManager.getPlanet(planetName), jediRank); //printJedi()
+    public void getYoungestJedi(String planetName, JediRank jediRank) {
+        if(!(planetManager.containsPlanet(planetName))) {//can we put this into a test class or something??
+            throw new PlanetManagementException("Operation wasn't successful. There is no such planet.");
+        }
+        System.out.println(jediManager.getYoungestJedi(planetManager.getPlanet(planetName), jediRank).toString());//Will it work without tostring??
     }
 
     public void getMostUsedSaberColor(String planetName, JediRank jediRank) {
@@ -66,5 +69,17 @@ public class StarWarsUniverse {
 
     public void getMostUsedSaberColor(String planetName) {
         System.out.println("Most used saber color of grandmasters on " + planetName + " is: " + planetManager.getMostUsedSaberColor(planetName, JediRank.GRAND_MASTER));
+    }
+
+    public void printPlanet(String planetName) {
+        System.out.println(planetManager.getPlanet(planetName).toString());
+    }
+
+    public void printJedi(String jediName) {
+        System.out.println(jediManager.getJedi(jediName).toString());
+    }
+
+    public void printTwoPlanetsJedis(String firstPlanetName, String secondPlanetName) {
+        System.out.println(planetManager.printTwoPlanets(firstPlanetName, secondPlanetName));
     }
 }
