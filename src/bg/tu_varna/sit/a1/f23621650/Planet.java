@@ -2,24 +2,38 @@ package bg.tu_varna.sit.a1.f23621650;
 
 import java.util.*;
 
-public class Planet { // целият клас е под въпрос, има ли смисъл от него?
-    private String name;// do we need the name in here?
-    private HashMap<String, Jedi> jediMap = new HashMap<>();//do we need the jedis here
+public class Planet {
+    private String name;
+    private HashMap<String, Jedi> jediMap = new HashMap<>();
 
     public String getName() {
         return name;
-    }
-
-    public HashMap<String, Jedi> getJediMap() {
-        return jediMap;
     }
 
     public Planet(String name) {
         this.name = name;
     }
 
-    //public void addToPlanet(Jedi jedi) for encapsulation
-    //printPlanet here
+    public void addToPlanet(String jediName, Jedi jedi) {
+        jediMap.put(jediName, jedi);
+    }
+
+    public void removeJedi(String jediName) {
+        jediMap.remove(jediName);
+    }
+
+    public boolean containsJedi(String jediName){
+        return jediMap.containsKey(jediName);
+    }
+
+    public boolean isEmpty(){
+        return jediMap.isEmpty();
+    }
+
+    public Collection<Jedi> getJedis(){
+        return jediMap.values();
+    }
+
     public List<Jedi> getJedis(Planet planet) {
         List<Jedi> allJedis = new ArrayList<>(this.jediMap.values());
         allJedis.addAll(planet.jediMap.values());
@@ -39,7 +53,6 @@ public class Planet { // целият клас е под въпрос, има л
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (!(o instanceof Planet planet)) return false;
         return Objects.equals(name, planet.name);
     }

@@ -1,14 +1,11 @@
 package bg.tu_varna.sit.a1.f23621650;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class StarWarsUniverse {
     //Singleton implementation
     private static StarWarsUniverse starWarsUniverse;
     private StarWarsUniverse(){
-        jediManager = new JediManager();
-        planetManager = new PlanetManager();
+        jediManager = JediManager.getInstance();
+        planetManager = PlanetManager.getInstance();
     }
     public static StarWarsUniverse getInstance() {
         if(starWarsUniverse == null) {
@@ -17,15 +14,14 @@ public class StarWarsUniverse {
         return starWarsUniverse;
     }
 
-    // is it okay for this to be placed here?
-    private JediManager jediManager;//static?
+    private JediManager jediManager;
     private PlanetManager planetManager;
 
     public void addPlanetToUniverse(String planetName) {
         planetManager.addPlanet(planetName);
     }
 
-    public void addJediToPlanet(String planetName, String jediName, JediRank jediRank, int jediAge, String saberColor, double jediStrength) {
+    public void createJedi(String planetName, String jediName, JediRank jediRank, int jediAge, String saberColor, double jediStrength) {
         if(!(planetManager.containsPlanet(planetName)))
         {
             throw new PlanetManagementException("Jedi creation wasn't successful. There is no such planet.");
@@ -57,10 +53,10 @@ public class StarWarsUniverse {
     }
 
     public void getYoungestJedi(String planetName, JediRank jediRank) {
-        if(!(planetManager.containsPlanet(planetName))) {//can we put this into a test class or something??
+        if(!(planetManager.containsPlanet(planetName))) {       //this repeats
             throw new PlanetManagementException("Operation wasn't successful. There is no such planet.");
         }
-        System.out.println(jediManager.getYoungestJedi(planetManager.getPlanet(planetName), jediRank).toString());//Will it work without tostring??
+        System.out.println(jediManager.getYoungestJedi(planetManager.getPlanet(planetName), jediRank));
     }
 
     public void getMostUsedSaberColor(String planetName, JediRank jediRank) {

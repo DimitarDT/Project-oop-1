@@ -1,22 +1,29 @@
 package bg.tu_varna.sit.a1.f23621650;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
 public class JediManager {
-    private Map<String, Jedi> jedis;
-    public JediManager() {
+    //Singleton implementation
+    private static JediManager jediManager;
+    private JediManager(){
         jedis = new HashMap<>();
     }
-    //singleton? i za planetite syshto
+    public static JediManager getInstance(){
+        if(jediManager == null){
+            jediManager = new JediManager();
+        }
+        return jediManager;
+    }
+
+    private Map<String, Jedi> jedis;
+
     public void addJedi(Jedi jedi) {
         if(jedis.containsKey(jedi.getJediName()))
             throw new JediManagementException("Jedi " + jedi.getJediName() + " already exists on this or another planet!");
 
         jedis.put(jedi.getJediName(), jedi);
-        jedi.getPlanet().getJediMap().put(jedi.getJediName(), jedi);//???
         System.out.println("Jedi creation was successful.");
     }
 
@@ -27,12 +34,12 @@ public class JediManager {
     }
 
     public void removeJedi(String jediName, Planet planet) {
-        if(!planet.getJediMap().containsKey(jediName))//rework jedimap//???
+        if(!planet.containsJedi(jediName))
         {
             throw new JediManagementException("There is no such jedi on this planet!");
         }
         jedis.remove(jediName);
-        planet.getJediMap().remove(jediName);
+        planet.removeJedi(jediName);
         System.out.println("Jedi was removed.");
     }
 
@@ -57,11 +64,11 @@ public class JediManager {
     }
 
     public Jedi getStrongestJedi(Planet planet){
-        if(planet.getJediMap().isEmpty()) {//???
+        if(planet.isEmpty()) {
             throw new JediManagementException("There are no jedis on this planet!");
         }
         Jedi strongestJedi = null;
-        for(Jedi jedi : planet.getJediMap().values()) {
+        for(Jedi jedi : planet.getJedis()) {
             if(strongestJedi == null || jedi.getStrength() > strongestJedi.getStrength()) {
                 strongestJedi = jedi;
             }
@@ -70,9 +77,9 @@ public class JediManager {
     }
 
     public Jedi getYoungestJedi(Planet planet, JediRank jediRank) {
-        if(planet.getJediMap().isEmpty()) {//???
+        if(planet.isEmpty()) {
             throw new JediManagementException("There are no jedis on this planet!");
         }
-        return planet.getJediMap().values().stream().filter(j -> j.getJediRank() == jediRank).min(Comparator.comparing(Jedi::getJediName)).orElse(null);
+        return planet.getJedis().stream().filter(j -> j.getJediRank() == jediRank).min(Comparator.comparingInt(Jedi::getAge).thenComparing(Jedi::getJediName)).orElse(null);
     }
 }

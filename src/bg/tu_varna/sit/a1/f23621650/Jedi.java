@@ -3,10 +3,23 @@ package bg.tu_varna.sit.a1.f23621650;
 import java.util.Objects;
 
 public class Jedi {
+    public enum LightsaberColor {
+        BLUE, GREEN, PURPLE, YELLOW, ORANGE, WHITE, BLACK, RED;
+
+        public static LightsaberColor fromString(String input) {
+            if (input == null) return null;//???
+
+            try {
+                return LightsaberColor.valueOf(input.trim().toUpperCase());
+            } catch (IllegalArgumentException e) {
+                return null;
+            }
+        }
+    }
     private String jediName;
     private JediRank jediRank;
     private int age;
-    private String lightsaberColor;
+    private LightsaberColor lightsaberColor;
     private double strength;
     private Planet planet;
 
@@ -34,7 +47,7 @@ public class Jedi {
         return age;
     }
 
-    public String getLightsaberColor() {
+    public LightsaberColor getLightsaberColor() {
         return lightsaberColor;
     }
 
@@ -42,13 +55,20 @@ public class Jedi {
         return planet;
     }
 
+    private void addSelfToPlanet() {
+        planet.addToPlanet(jediName, this);
+    }
+
     public Jedi(String jediName, JediRank jediRank, int age, String lightsaberColor, double strength, Planet planet) {
+        if(strength < 1 || strength > 2)
+            throw new JediManagementException("Strength must be between 1 and 2.");
         this.jediName = jediName;
         this.jediRank = jediRank;
         this.age = age;
-        this.lightsaberColor = lightsaberColor;
-        this.strength = strength;//throw exception if out of bounds
+        this.lightsaberColor = LightsaberColor.fromString(lightsaberColor);
+        this.strength = strength;
         this.planet = planet;
+        addSelfToPlanet();
     }
 
     @Override
@@ -63,12 +83,9 @@ public class Jedi {
         sb.append("}\n");
         return sb.toString();
     }
-    //Objects version 1.7?? Also, should there be non-null fields? Which fields should be included to ensure every jedi is unique?
-    //this uses the intellij default methods
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (!(o instanceof Jedi jedi)) return false;
         return Objects.equals(jediName, jedi.jediName);
     }
