@@ -1,8 +1,9 @@
 package bg.tu_varna.sit.a1.f23621650;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Planet {
+public class Planet implements Serializable {
     private String name;
     private HashMap<String, Jedi> jediMap = new HashMap<>();
 

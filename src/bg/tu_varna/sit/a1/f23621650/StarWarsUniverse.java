@@ -1,5 +1,7 @@
 package bg.tu_varna.sit.a1.f23621650;
 
+import java.io.IOException;
+
 public class StarWarsUniverse {
     //Singleton implementation
     private static StarWarsUniverse starWarsUniverse;
@@ -77,5 +79,25 @@ public class StarWarsUniverse {
 
     public void printTwoPlanetsJedis(String firstPlanetName, String secondPlanetName) {
         System.out.println(planetManager.printTwoPlanets(firstPlanetName, secondPlanetName));
+    }
+
+    public void writeToFile(String fileName) {
+        UniverseWriter universeWriter = new UniverseWriter(jediManager, planetManager);
+        try {
+            universeWriter.writeTo(fileName + ".txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void readFromFile(String fileName) { //add warning when person is trying to load without having saved first
+        UniverseReader universeReader = new UniverseReader();
+        try {
+            universeReader.readFrom(fileName + ".txt");
+            jediManager = universeReader.getJediManager();
+            planetManager = universeReader.getPlanetManager();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

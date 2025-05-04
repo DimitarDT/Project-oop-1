@@ -1,10 +1,11 @@
 package bg.tu_varna.sit.a1.f23621650;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JediManager {
+public class JediManager implements Serializable {
     //Singleton implementation
     private static JediManager jediManager;
     private JediManager(){

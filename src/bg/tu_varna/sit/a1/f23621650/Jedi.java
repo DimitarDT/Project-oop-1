@@ -1,8 +1,9 @@
 package bg.tu_varna.sit.a1.f23621650;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Jedi {
+public class Jedi implements Serializable {
     public enum LightsaberColor {
         BLUE, GREEN, PURPLE, YELLOW, ORANGE, WHITE, BLACK, RED;
 

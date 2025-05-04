@@ -1,8 +1,9 @@
 package bg.tu_varna.sit.a1.f23621650;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class PlanetManager {
+public class PlanetManager implements Serializable {
     //Singleton implementation
     private static PlanetManager planetManager;
     private PlanetManager(){
