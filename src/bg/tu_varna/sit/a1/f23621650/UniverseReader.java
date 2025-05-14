@@ -5,23 +5,31 @@ import java.io.*;
 public class UniverseReader {
     JediManager jediManager;
     PlanetManager planetManager;
+    JediManager jediManagerTemp;
+    PlanetManager planetManagerTemp;
+
+    public UniverseReader() {
+        this.jediManager = JediManager.getInstance();
+        this.planetManager = PlanetManager.getInstance();
+    }
 
     public void readFrom(String fileName) throws IOException, ClassNotFoundException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileName)));
-        jediManager = (JediManager) objectInputStream.readObject();
-        planetManager = (PlanetManager) objectInputStream.readObject();
-        objectInputStream.close();
-    }
-
-    public JediManager getJediManager() {
-        if(jediManager == null)
-            throw new NullPointerException("jediManager is null");
-        return jediManager;
-    }
-
-    public PlanetManager getPlanetManager() {
-        if(jediManager == null)
-            throw new NullPointerException("jediManager is null");
-        return planetManager;
+        ObjectInputStream objectInputStream = null;
+        try {
+            objectInputStream = new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileName)));
+            jediManagerTemp = (JediManager) objectInputStream.readObject();
+            planetManagerTemp = (PlanetManager) objectInputStream.readObject();
+            jediManager.copy(jediManagerTemp);
+            planetManager.copy(planetManagerTemp);
+        }
+        finally {
+            if(objectInputStream != null) {
+                try {
+                    objectInputStream.close();
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
     }
 }

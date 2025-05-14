@@ -1,13 +1,17 @@
 package bg.tu_varna.sit.a1.f23621650;
 
+import bg.tu_varna.sit.a1.f23621650.States.SavedState;
+import bg.tu_varna.sit.a1.f23621650.States.State;
+import bg.tu_varna.sit.a1.f23621650.States.UnopenedState;
+import bg.tu_varna.sit.a1.f23621650.States.UnsavedState;
+
 import java.io.IOException;
 
 public class StarWarsUniverse {
     //Singleton implementation
     private static StarWarsUniverse starWarsUniverse;
     private StarWarsUniverse(){
-        jediManager = JediManager.getInstance();
-        planetManager = PlanetManager.getInstance();
+        state = new UnopenedState();
     }
     public static StarWarsUniverse getInstance() {
         if(starWarsUniverse == null) {
@@ -16,99 +20,157 @@ public class StarWarsUniverse {
         return starWarsUniverse;
     }
 
-    private JediManager jediManager;
-    private PlanetManager planetManager;
     private State state;
+    private String currentFile;
 
-    public void addPlanetToUniverse(String planetName) {
-        planetManager.addPlanet(planetName);
-    }
-
-    public void createJedi(String planetName, String jediName, JediRank jediRank, int jediAge, String saberColor, double jediStrength) {
-        if(!(planetManager.containsPlanet(planetName)))
-        {
-            throw new PlanetManagementException("Jedi creation wasn't successful. There is no such planet.");
+    public void addPlanetToUniverse(String planetName) throws PlanetManagementException {
+        try {
+            state.addPlanetToUniverse(planetName.toLowerCase());
+            setState(new UnsavedState());
+            System.out.println("Planet " + planetName + " added to universe.");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
-        jediManager.addJedi(new Jedi(jediName, jediRank, jediAge, saberColor, jediStrength, planetManager.getPlanet(planetName)));
-        setState(new UnsavedState());
     }
 
-    public void removeJediFromPlanet(String jediName, String planetName) {
-        if(!(planetManager.containsPlanet(planetName)))
-        {
-            throw new PlanetManagementException("Jedi removal wasn't successful. There is no such planet.");
+    public void createJedi(String planetName, String jediName, JediRank jediRank, int jediAge, String saberColor, double jediStrength) throws PlanetManagementException, JediManagementException {
+        try {
+            state.createJedi(planetName.toLowerCase(), jediName.toLowerCase(), jediRank, jediAge, saberColor, jediStrength);
+            setState(new UnsavedState());
+            System.out.println("Jedi " + jediName + " added to universe.");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
-        jediManager.removeJedi(jediName, planetManager.getPlanet(planetName));
-        setState(new UnsavedState());
     }
 
-    public void promote(String jediName, double multiplier) {
-        if(multiplier <= 0)
-            throw new IllegalArgumentException("Multiplier must be positive number!");
-        jediManager.promoteJedi(jediName, multiplier);
-        setState(new UnsavedState());
-    }
-
-    public void demote(String jediName, double multiplier) {
-        if(multiplier <= 0)
-            throw new IllegalArgumentException("Multiplier must be positive number!");
-        jediManager.demoteJedi(jediName, multiplier);
-        setState(new UnsavedState());
-    }
-
-    public void getStrongestJedi(String planetName) {
-        if(!(planetManager.containsPlanet(planetName))) {
-            throw new PlanetManagementException("Operation wasn't successful. There is no such planet.");
+    public void removeJediFromPlanet(String jediName, String planetName) throws PlanetManagementException, JediManagementException {
+        try {
+            state.removeJediFromPlanet(jediName.toLowerCase(), planetName.toLowerCase());
+            setState(new UnsavedState());
+            System.out.println("Jedi " + jediName + " removed from universe.");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
-        System.out.println(jediManager.getStrongestJedi(planetManager.getPlanet(planetName)).toString());
     }
 
-    public void getYoungestJedi(String planetName, JediRank jediRank) {
-        if(!(planetManager.containsPlanet(planetName))) {
-            throw new PlanetManagementException("Operation wasn't successful. There is no such planet.");
+    public void promote(String jediName, double multiplier) throws JediManagementException {
+        try {
+            state.promote(jediName.toLowerCase(), multiplier);
+            setState(new UnsavedState());
+            System.out.println("Jedi " + jediName + " promoted.");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
-        System.out.println(jediManager.getYoungestJedi(planetManager.getPlanet(planetName), jediRank));
     }
 
-    public void getMostUsedSaberColor(String planetName, JediRank jediRank) {
-        System.out.println("Most used saber color is: " + planetManager.getMostUsedSaberColor(planetName, jediRank));
+    public void demote(String jediName, double multiplier) throws JediManagementException {
+        try {
+            state.demote(jediName.toLowerCase(), multiplier);
+            setState(new UnsavedState());
+            System.out.println("Jedi " + jediName + " was demoted.");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public void getMostUsedSaberColor(String planetName) {
-        System.out.println("Most used saber color of grandmasters on " + planetName + " is: " + planetManager.getMostUsedSaberColor(planetName, JediRank.GRAND_MASTER));
+    public void getStrongestJedi(String planetName) throws PlanetManagementException, JediManagementException {
+        try {
+            System.out.println(state.getStrongestJedi(planetName.toLowerCase()));
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public void printPlanet(String planetName) {
-        System.out.println(planetManager.getPlanet(planetName).toString());
+    public void getYoungestJedi(String planetName, JediRank jediRank) throws PlanetManagementException, JediManagementException {
+        try {
+            System.out.println(state.getYoungestJedi(planetName.toLowerCase(), jediRank));
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public void printJedi(String jediName) {
-        System.out.println(jediManager.getJedi(jediName).toString());
+    public void getMostUsedSaberColor(String planetName, JediRank jediRank) throws JediManagementException {
+        try {
+            System.out.println("Most used saber color is: " + state.getMostUsedSaberColor(planetName.toLowerCase(), jediRank));
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void getMostUsedSaberColor(String planetName) throws JediManagementException {
+        try {
+            System.out.println("Most used saber color of grandmasters on " + planetName + " is: " + state.getMostUsedSaberColor(planetName.toLowerCase()));
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void printPlanet(String planetName) throws PlanetManagementException {
+        try {
+            System.out.println(state.printPlanet(planetName.toLowerCase()));
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void printJedi(String jediName) throws JediManagementException {
+        try {
+            System.out.println(state.printJedi(jediName.toLowerCase()));
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void printTwoPlanetsJedis(String firstPlanetName, String secondPlanetName) {
-        System.out.println(planetManager.printTwoPlanets(firstPlanetName, secondPlanetName));
-    }
-
-    public void writeToFile(String fileName) {
-        UniverseWriter universeWriter = new UniverseWriter(jediManager, planetManager);
         try {
-            universeWriter.writeTo(fileName + ".txt");
-            setState(new SavedState());
+            System.out.println(state.printTwoPlanetsJedis(firstPlanetName.toLowerCase(), secondPlanetName.toLowerCase()));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
     }
 
-    public void readFromFile(String fileName) {
-        UniverseReader universeReader = new UniverseReader();
+    public void saveAs(String fileName) {
         try {
-            state.checkState();
-            universeReader.readFrom(fileName + ".txt");
-            jediManager = universeReader.getJediManager();
-            planetManager = universeReader.getPlanetManager();
+            if(!fileName.endsWith(".txt"))
+                fileName+=".txt";
+            state.writeToFile(fileName);
+            setState(new SavedState());
+            currentFile = fileName;
+            System.out.println("File saved.");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void save() {
+        saveAs(currentFile);
+    }
+
+    public void readFromFile(String fileName) {
+        try {
+            if(!fileName.endsWith(".txt"))
+                fileName+=".txt";
+            state.readFromFile(fileName);
+            setState(new SavedState());
+            currentFile = fileName;
+            System.out.println("File opened.");
+        } catch (EmptyFileException e) {
+            setState(new SavedState());
+            currentFile = fileName;
+            System.out.println("File opened.");
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void close(){
+        try {
+            state.close();
+            setState(new UnopenedState());
+            currentFile = null;
+            System.out.println("File closed.");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 

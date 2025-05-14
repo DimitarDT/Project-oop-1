@@ -1,20 +1,58 @@
 package bg.tu_varna.sit.a1.f23621650;
 
+import bg.tu_varna.sit.a1.f23621650.Commands.CLI;
+import bg.tu_varna.sit.a1.f23621650.Commands.CommandLineInterface;
+
+import java.util.Scanner;
+
 public class Application {
 
     public static void main(String[] args) {
-        StarWarsUniverse starWarsUniverse = StarWarsUniverse.getInstance();
-        /*starWarsUniverse.addPlanetToUniverse("Tattoine");
-        starWarsUniverse.createJedi("Tattoine", "Anakin", JediRank.KNIGHT, 20, "Red", 1.5);
-        starWarsUniverse.createJedi("Tattoine", "Obi-wan", JediRank.KNIGHT, 30, "Green", 1.5);
-        starWarsUniverse.createJedi("Tattoine", "Ashoka", JediRank.KNIGHT, 18, "Green", 1);
+        /*StarWarsUniverse starWarsUniverse = StarWarsUniverse.getInstance();
+        try {
+            starWarsUniverse.addPlanetToUniverse("Coruscant");
+            starWarsUniverse.addPlanetToUniverse("Tatooine");
+            starWarsUniverse.addPlanetToUniverse("Naboo");
+            starWarsUniverse.addPlanetToUniverse("Kashyyyk");
+            starWarsUniverse.addPlanetToUniverse("Alderaan");
 
-        starWarsUniverse.addPlanetToUniverse("Bomboclat");
-        starWarsUniverse.createJedi("Bomboclat", "JAnakin", JediRank.KNIGHT, 21, "Green", 1.6);
-        starWarsUniverse.createJedi("Bomboclat", "WaObi-waan", JediRank.GRAND_MASTER, 30, "Orange", 1.6);
-        starWarsUniverse.createJedi("Bomboclat", "RasclatAshoka", JediRank.PADAWAN, 19, "Green", 1.2);*/
+            starWarsUniverse.createJedi("Coruscant", "Mace Windu", JediRank.MASTER, 53, "purple", 1.95);
+            starWarsUniverse.createJedi("Coruscant", "Depa Billaba", JediRank.MASTER, 45, "green", 1.7);
+            starWarsUniverse.createJedi("Coruscant", "Cin Drallig", JediRank.BATTLE_MASTER, 50, "green", 1.8);
 
-        starWarsUniverse.readFromFile("universe");
-        starWarsUniverse.printTwoPlanetsJedis("Tattoine", "Bomboclat");
+            starWarsUniverse.createJedi("Tatooine", "Anakin Skywalker", JediRank.KNIGHT, 22, "blue", 1.98);
+            starWarsUniverse.createJedi("Tatooine", "Luke Skywalker", JediRank.KNIGHT, 23, "green", 1.95);
+            starWarsUniverse.createJedi("Tatooine", "A'Sharad Hett", JediRank.KNIGHT, 27, "blue", 1.75);
+
+            starWarsUniverse.createJedi("Naboo", "Qui-Gon Jinn", JediRank.MASTER, 48, "green", 1.85);
+            starWarsUniverse.createJedi("Naboo", "Tera Sinube", JediRank.MASTER, 200, "blue", 1.65);
+            starWarsUniverse.createJedi("Naboo", "Yarael Poof", JediRank.MASTER, 300, "blue", 1.7);
+
+            starWarsUniverse.createJedi("Kashyyyk", "Gungi", JediRank.YOUNGLING, 12, "green", 1.2);
+            starWarsUniverse.createJedi("Kashyyyk", "Tyvokka", JediRank.MASTER, 250, "green", 1.9);
+            starWarsUniverse.createJedi("Kashyyyk", "Jaro Tapal", JediRank.MASTER, 38, "double-bladed blue", 1.85);
+
+            starWarsUniverse.createJedi("Alderaan", "Zett Jukassa", JediRank.PADAWAN, 12, "blue", 1.4);
+            starWarsUniverse.createJedi("Alderaan", "Bail Organa", JediRank.INITIATE, 20, "none", 1.3);
+            starWarsUniverse.createJedi("Alderaan", "Tynnra Pamlo", JediRank.YOUNGLING, 10, "yellow", 1.2);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }*/
+
+        CLI.printMenu();
+        while (true) {
+            Scanner sc = new Scanner(System.in);
+            String input = sc.nextLine();
+            if(input.equals("exit")) {
+                break;
+            }
+            CLI cli = new CommandLineInterface(input);
+            try {
+                cli.execute();
+            } catch (UnknownCommandException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

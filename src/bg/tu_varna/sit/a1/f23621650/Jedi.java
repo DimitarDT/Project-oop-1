@@ -17,12 +17,12 @@ public class Jedi implements Serializable {
             }
         }
     }
-    private String jediName;
+    private final String jediName;
     private JediRank jediRank;
-    private int age;
-    private LightsaberColor lightsaberColor;
+    private final int age;
+    private final LightsaberColor lightsaberColor;
     private double strength;
-    private Planet planet;
+    private final Planet planet;
 
     public String getJediName() {
         return jediName;
@@ -32,17 +32,7 @@ public class Jedi implements Serializable {
         return jediRank;
     }
 
-    public void setJediRank(JediRank jediRank) {
-        this.jediRank = jediRank;
-    }
-
-    public double getStrength() {
-        return strength;
-    }
-
-    public void setStrength(double strength) {
-        this.strength = strength;
-    }
+    public double getStrength() { return strength; }
 
     public int getAge() {
         return age;
@@ -52,15 +42,11 @@ public class Jedi implements Serializable {
         return lightsaberColor;
     }
 
-    public Planet getPlanet() {
-        return planet;
-    }
-
     private void addSelfToPlanet() {
         planet.addToPlanet(jediName, this);
     }
 
-    public Jedi(String jediName, JediRank jediRank, int age, String lightsaberColor, double strength, Planet planet) {
+    public Jedi(String jediName, JediRank jediRank, int age, String lightsaberColor, double strength, Planet planet) throws JediManagementException {
         if(strength < 1 || strength > 2)
             throw new JediManagementException("Strength must be between 1 and 2.");
         this.jediName = jediName;
@@ -72,16 +58,34 @@ public class Jedi implements Serializable {
         addSelfToPlanet();
     }
 
+    public void promoteJedi(double multiplier) throws JediManagementException {
+        if(jediRank.ordinal() < JediRank.values().length) {
+            jediRank = JediRank.values()[jediRank.ordinal() + 1];
+            strength = multiplier * strength + strength;
+        } else {
+            throw new JediManagementException("Jedi is the highest rank!");
+        }
+    }
+
+    public void demoteJedi(double multiplier) throws JediManagementException {
+        if(jediRank.ordinal() > 0) {
+            jediRank = JediRank.values()[jediRank.ordinal() - 1];
+            strength = strength - (multiplier * strength);
+        } else {
+            throw new JediManagementException("Jedi is the lowest rank!");
+        }
+    }
+
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("The jedi ");
-        sb.append("jediName='").append(jediName).append('\'');
-        sb.append(", jediRank=").append(jediRank);
-        sb.append(", age=").append(age);
-        sb.append(", lightsaberColor='").append(lightsaberColor).append('\'');
-        sb.append(", strength=").append(strength);
-        sb.append(", planet=").append(planet.getName());
-        sb.append("}\n");
+        final StringBuilder sb = new StringBuilder("Jedi ");
+        sb.append('\'').append(CapitalizeWords.capitalize(jediName)).append("' has: ");
+        sb.append("Rank - ").append(jediRank);
+        sb.append(", Age - ").append(age);
+        sb.append(", lightsaber color - '").append(lightsaberColor).append('\'');
+        sb.append(", strength - ").append(strength);
+        sb.append(" and lives on planet - ").append(CapitalizeWords.capitalize(planet.getName()));
+        sb.append("\n");
         return sb.toString();
     }
 

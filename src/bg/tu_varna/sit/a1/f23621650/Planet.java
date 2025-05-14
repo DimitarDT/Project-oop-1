@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Planet implements Serializable {
-    private String name;
-    private HashMap<String, Jedi> jediMap = new HashMap<>();
+    private final String name;
+    private final HashMap<String, Jedi> jediMap = new HashMap<>();
 
     public String getName() {
         return name;
@@ -27,28 +27,65 @@ public class Planet implements Serializable {
         return jediMap.containsKey(jediName);
     }
 
-    public boolean isEmpty(){
-        return jediMap.isEmpty();
-    }
-
-    public Collection<Jedi> getJedis(){
-        return jediMap.values();
-    }
-
     public List<Jedi> getJedis(Planet planet) {
         List<Jedi> allJedis = new ArrayList<>(this.jediMap.values());
         allJedis.addAll(planet.jediMap.values());
         return allJedis;
     }
 
+    public Jedi getStrongestJedi() throws JediManagementException {
+        if(jediMap.isEmpty()) {
+            throw new JediManagementException("There are no jedis on this planet!");
+        }
+        Jedi strongestJedi = null;
+        for(Jedi jedi : jediMap.values()) {
+            if(strongestJedi == null || jedi.getStrength() > strongestJedi.getStrength()) {
+                strongestJedi = jedi;
+            }
+        }
+        return strongestJedi;
+    }
+
+    public Jedi getYoungestJedi(JediRank jediRank) throws JediManagementException {
+        if(jediMap.isEmpty()) {
+            throw new JediManagementException("There are no jedis on this planet!");
+        }
+        return jediMap.values().stream().filter(j -> j.getJediRank() == jediRank).min(Comparator.comparingInt(Jedi::getAge).thenComparing(Jedi::getJediName)).orElse(null);
+    }
+
+    public String getMostUsedSaberColor(JediRank jediRank) throws JediManagementException {
+        Map<Jedi.LightsaberColor, Integer> saberPairs = new HashMap<>();
+        for(Jedi jedi : jediMap.values()) {
+            if(jedi.getJediRank().equals(jediRank)) {
+                Jedi.LightsaberColor color = jedi.getLightsaberColor();
+                saberPairs.put(color, saberPairs.getOrDefault(color, 0) + 1);
+            }
+        }
+        if(saberPairs.isEmpty()){
+            throw new JediManagementException("There are no jedis with this rank on this planet!");
+        }
+
+        Jedi.LightsaberColor mostUsedColor = null;
+        int maxCount = 0;
+        for(Map.Entry<Jedi.LightsaberColor, Integer> entry: saberPairs.entrySet()){
+            Jedi.LightsaberColor color = entry.getKey();
+            int count = entry.getValue();
+
+            if (mostUsedColor == null || count > maxCount) {
+                maxCount = count;
+                mostUsedColor = color;
+            }
+        }
+        return mostUsedColor.toString();
+    }
+
     @Override
     public String toString() {
         List<Jedi> jediList = new ArrayList<>(jediMap.values());
         jediList.sort(Comparator.comparing(Jedi::getJediRank).thenComparing(Jedi::getJediName));
-        final StringBuilder sb = new StringBuilder("Planet{");
-        sb.append("name='").append(name).append('\'');
-        sb.append(", jedis=").append(jediList);
-        sb.append('}');
+        final StringBuilder sb = new StringBuilder("Planet");
+        sb.append(" '").append(CapitalizeWords.capitalize(name)).append("' ");
+        sb.append("has the following jedis residing on it: \n").append(jediList);
         return sb.toString();
     }
 

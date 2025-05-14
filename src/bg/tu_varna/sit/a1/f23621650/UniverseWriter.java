@@ -6,15 +6,26 @@ public class UniverseWriter {
     JediManager jediManager;
     PlanetManager planetManager;
 
-    public UniverseWriter(JediManager jediManager, PlanetManager planetManager) {
-        this.jediManager = jediManager;
-        this.planetManager = planetManager;
+    public UniverseWriter() {
+        this.jediManager = JediManager.getInstance();
+        this.planetManager = PlanetManager.getInstance();
     }
 
     public void writeTo(String fileName) throws IOException {
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName)));
-        objectOutputStream.writeObject(jediManager);
-        objectOutputStream.writeObject(planetManager);
-        objectOutputStream.close();
+        ObjectOutputStream objectOutputStream = null;
+        try{
+            objectOutputStream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName)));
+            objectOutputStream.writeObject(jediManager);
+            objectOutputStream.writeObject(planetManager);
+        }
+        finally{
+            if(objectOutputStream != null){
+                try {
+                    objectOutputStream.close();
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
     }
 }
