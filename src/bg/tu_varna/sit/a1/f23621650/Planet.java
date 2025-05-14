@@ -1,5 +1,7 @@
 package bg.tu_varna.sit.a1.f23621650;
 
+import bg.tu_varna.sit.a1.f23621650.Exceptions.JediManagementException;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -54,10 +56,10 @@ public class Planet implements Serializable {
     }
 
     public String getMostUsedSaberColor(JediRank jediRank) throws JediManagementException {
-        Map<Jedi.LightsaberColor, Integer> saberPairs = new HashMap<>();
+        Map<LightsaberColor, Integer> saberPairs = new HashMap<>();
         for(Jedi jedi : jediMap.values()) {
             if(jedi.getJediRank().equals(jediRank)) {
-                Jedi.LightsaberColor color = jedi.getLightsaberColor();
+                LightsaberColor color = jedi.getLightsaberColor();
                 saberPairs.put(color, saberPairs.getOrDefault(color, 0) + 1);
             }
         }
@@ -65,10 +67,10 @@ public class Planet implements Serializable {
             throw new JediManagementException("There are no jedis with this rank on this planet!");
         }
 
-        Jedi.LightsaberColor mostUsedColor = null;
+        LightsaberColor mostUsedColor = null;
         int maxCount = 0;
-        for(Map.Entry<Jedi.LightsaberColor, Integer> entry: saberPairs.entrySet()){
-            Jedi.LightsaberColor color = entry.getKey();
+        for(Map.Entry<LightsaberColor, Integer> entry: saberPairs.entrySet()){
+            LightsaberColor color = entry.getKey();
             int count = entry.getValue();
 
             if (mostUsedColor == null || count > maxCount) {

@@ -1,6 +1,6 @@
 package bg.tu_varna.sit.a1.f23621650.States;
 
-import bg.tu_varna.sit.a1.f23621650.EmptyFileException;
+import bg.tu_varna.sit.a1.f23621650.Exceptions.EmptyFileException;
 import bg.tu_varna.sit.a1.f23621650.JediManager;
 import bg.tu_varna.sit.a1.f23621650.PlanetManager;
 import bg.tu_varna.sit.a1.f23621650.UniverseReader;

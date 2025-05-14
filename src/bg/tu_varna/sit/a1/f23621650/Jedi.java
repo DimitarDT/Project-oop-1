@@ -1,22 +1,11 @@
 package bg.tu_varna.sit.a1.f23621650;
 
+import bg.tu_varna.sit.a1.f23621650.Exceptions.JediManagementException;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 public class Jedi implements Serializable {
-    public enum LightsaberColor {
-        BLUE, GREEN, PURPLE, YELLOW, ORANGE, WHITE, BLACK, RED;
-
-        public static LightsaberColor fromString(String input) {
-            if (input == null) return null;//???
-
-            try {
-                return LightsaberColor.valueOf(input.trim().toUpperCase());
-            } catch (IllegalArgumentException e) {
-                return null;
-            }
-        }
-    }
     private final String jediName;
     private JediRank jediRank;
     private final int age;

@@ -1,7 +1,7 @@
 package bg.tu_varna.sit.a1.f23621650.Commands;
 
-import bg.tu_varna.sit.a1.f23621650.JediManagementException;
-import bg.tu_varna.sit.a1.f23621650.PlanetManagementException;
+import bg.tu_varna.sit.a1.f23621650.Exceptions.JediManagementException;
+import bg.tu_varna.sit.a1.f23621650.Exceptions.PlanetManagementException;
 import bg.tu_varna.sit.a1.f23621650.StarWarsUniverse;
 
 public class CommandGetStrongestJedi implements Command {

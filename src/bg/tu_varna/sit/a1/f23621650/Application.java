@@ -2,13 +2,14 @@ package bg.tu_varna.sit.a1.f23621650;
 
 import bg.tu_varna.sit.a1.f23621650.Commands.CLI;
 import bg.tu_varna.sit.a1.f23621650.Commands.CommandLineInterface;
+import bg.tu_varna.sit.a1.f23621650.Exceptions.UnknownCommandException;
 
 import java.util.Scanner;
 
 public class Application {
 
     public static void main(String[] args) {
-        /*StarWarsUniverse starWarsUniverse = StarWarsUniverse.getInstance();
+        StarWarsUniverse starWarsUniverse = StarWarsUniverse.getInstance();
         try {
             starWarsUniverse.addPlanetToUniverse("Coruscant");
             starWarsUniverse.addPlanetToUniverse("Tatooine");
@@ -38,7 +39,7 @@ public class Application {
         }
         catch(Exception e){
             System.out.println(e.getMessage());
-        }*/
+        }
 
         CLI.printMenu();
         while (true) {

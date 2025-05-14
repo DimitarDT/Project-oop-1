@@ -1,5 +1,8 @@
 package bg.tu_varna.sit.a1.f23621650;
 
+import bg.tu_varna.sit.a1.f23621650.Exceptions.EmptyFileException;
+import bg.tu_varna.sit.a1.f23621650.Exceptions.JediManagementException;
+import bg.tu_varna.sit.a1.f23621650.Exceptions.PlanetManagementException;
 import bg.tu_varna.sit.a1.f23621650.States.SavedState;
 import bg.tu_varna.sit.a1.f23621650.States.State;
 import bg.tu_varna.sit.a1.f23621650.States.UnopenedState;
@@ -11,7 +14,7 @@ public class StarWarsUniverse {
     //Singleton implementation
     private static StarWarsUniverse starWarsUniverse;
     private StarWarsUniverse(){
-        state = new UnopenedState();
+        state = new SavedState();
     }
     public static StarWarsUniverse getInstance() {
         if(starWarsUniverse == null) {

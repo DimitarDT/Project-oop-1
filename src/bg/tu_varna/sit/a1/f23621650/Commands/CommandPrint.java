@@ -1,6 +1,9 @@
 package bg.tu_varna.sit.a1.f23621650.Commands;
 
 import bg.tu_varna.sit.a1.f23621650.*;
+import bg.tu_varna.sit.a1.f23621650.Exceptions.JediManagementException;
+import bg.tu_varna.sit.a1.f23621650.Exceptions.PlanetManagementException;
+import bg.tu_varna.sit.a1.f23621650.Exceptions.UnknownCommandException;
 
 import java.util.Scanner;
 
