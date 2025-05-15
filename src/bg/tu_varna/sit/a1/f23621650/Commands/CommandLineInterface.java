@@ -36,7 +36,7 @@ public class CommandLineInterface implements CLI{
             commands.get(CommandEnum.PRINT_TWO_PLANETS).execute(input.split("\\s+"));
             return;
         }
-        String[] splitInput = input.split("\\s+");
+        String[] splitInput = input.trim().split("\\s+");
         if(!(commands.containsKey(CommandEnum.valueOf(splitInput[0].toUpperCase())))) {
             throw new UnknownCommandException("Unknown command. Type help for a list of commands.");
         }

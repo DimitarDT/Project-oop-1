@@ -14,7 +14,7 @@ public class StarWarsUniverse {
     //Singleton implementation
     private static StarWarsUniverse starWarsUniverse;
     private StarWarsUniverse(){
-        state = new SavedState();
+        state = new UnopenedState();
     }
     public static StarWarsUniverse getInstance() {
         if(starWarsUniverse == null) {
