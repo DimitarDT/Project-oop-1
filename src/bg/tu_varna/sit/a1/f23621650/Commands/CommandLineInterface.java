@@ -37,10 +37,11 @@ public class CommandLineInterface implements CLI{
             return;
         }
         String[] splitInput = input.trim().split("\\s+");
-        if(!(commands.containsKey(CommandEnum.valueOf(splitInput[0].toUpperCase())))) {
-            throw new UnknownCommandException("Unknown command. Type help for a list of commands.");
-        }
+
         try {
+            if(!(commands.containsKey(CommandEnum.valueOf(splitInput[0].toUpperCase())))) {
+                throw new UnknownCommandException("Unknown command. Type help for a list of commands.");
+            }
             commands.get(CommandEnum.valueOf(splitInput[0].toUpperCase())).execute(splitInput);
         } catch (IllegalArgumentException e) {
             System.out.println("Invalid argument type or count. Please, refer to \"help\" for a list of commands.");

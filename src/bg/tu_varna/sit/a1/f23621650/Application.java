@@ -43,6 +43,7 @@ public class Application {
 
         CLI.printMenu();
         while (true) {
+            System.out.print("> ");
             Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
             if(input.equals("exit")) {
