@@ -29,10 +29,8 @@ public class Planet implements Serializable {
         return jediMap.containsKey(jediName);
     }
 
-    public List<Jedi> getJedis(Planet planet) {
-        List<Jedi> allJedis = new ArrayList<>(this.jediMap.values());
-        allJedis.addAll(planet.jediMap.values());
-        return allJedis;
+    public List<Jedi> getJedis() {
+        return new ArrayList<>(this.jediMap.values());
     }
 
     public Jedi getStrongestJedi() throws JediManagementException {

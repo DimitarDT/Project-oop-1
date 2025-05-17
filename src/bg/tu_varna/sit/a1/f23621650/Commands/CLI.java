@@ -3,6 +3,17 @@ package bg.tu_varna.sit.a1.f23621650.Commands;
 import bg.tu_varna.sit.a1.f23621650.Exceptions.UnknownCommandException;
 
 public interface CLI {
+    static void printTitle(){
+        System.out.println("\nA long time ago in a galaxy far, far away...\n\n");
+        System.out.println("     _______.___________.    ___      .______         ____    __    ____  ___      .______          _______.");
+        System.out.println("    /       |           |   /   \\     |   _  \\        \\   \\  /  \\  /   / /   \\     |   _  \\        /       |");
+        System.out.println("   |   (----`---|  |----`  /  ^  \\    |  |_)  |        \\   \\/    \\/   / /  ^  \\    |  |_)  |      |   (----`");
+        System.out.println("    \\   \\       |  |      /  /_\\  \\   |      /          \\            / /  /_\\  \\   |      /        \\   \\    ");
+        System.out.println(".----)   |      |  |     /  _____  \\  |  |\\  \\----.      \\    /\\    / /  _____  \\  |  |\\  \\----.----)   |   ");
+        System.out.println("|_______/       |__|    /__/     \\__\\ | _| `._____|       \\__/  \\__/ /__/     \\__\\ | _| `._____|_______/    ");
+        System.out.println("                                     === THE PROJECT STRIKES BACK ===\n");
+    }
+
     static void printMenu(){
         System.out.println("=== COMMAND MENU ===");
         System.out.println("add_planet <planet_name>");

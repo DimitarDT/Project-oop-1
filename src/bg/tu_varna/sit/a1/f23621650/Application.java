@@ -40,7 +40,7 @@ public class Application {
         catch(Exception e){
             System.out.println(e.getMessage());
         }*/
-
+        CLI.printTitle();
         CLI.printMenu();
         while (true) {
             System.out.print("> ");

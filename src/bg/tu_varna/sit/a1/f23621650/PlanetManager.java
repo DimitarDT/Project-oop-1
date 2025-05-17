@@ -39,7 +39,8 @@ public class PlanetManager implements Serializable {
     public String printTwoPlanets(String firstPlanetName, String secondPlanetName) {
         Planet firstPlanet = getPlanet(firstPlanetName);
         Planet secondPlanet = getPlanet(secondPlanetName);
-        List<Jedi> allJedis = firstPlanet.getJedis(secondPlanet);
+        List<Jedi> allJedis = firstPlanet.getJedis();
+        allJedis.addAll(secondPlanet.getJedis());
         allJedis.sort(Comparator.comparing(Jedi::getJediName));
         final StringBuilder sb = new StringBuilder("Jedis on planets ").append(CapitalizeWords.capitalize(firstPlanetName)).append(" and ").append(CapitalizeWords.capitalize(secondPlanetName)).append(":\n");
         for(Jedi jedi : allJedis) {

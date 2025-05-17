@@ -17,23 +17,14 @@ public class CommandPrint implements Command {
     @Override
     public void execute(String[] input) throws UnknownCommandException {
         if(input.length == 2) {
-            System.out.println("Jedi / Planet");
-            Scanner sc = new Scanner(System.in);
-            String command = sc.nextLine();
-            if(command.equalsIgnoreCase("Jedi")) {
-                try {
-                    universe.printJedi(input[1]);
-                } catch (JediManagementException e) {
-                    System.out.println(e.getMessage());
-                }
-            } else if (command.equalsIgnoreCase("Planet")) {
+            try {
+                universe.printJedi(input[1]);
+            } catch (JediManagementException e) {
                 try {
                     universe.printPlanet(input[1]);
-                } catch (PlanetManagementException e) {
-                    System.out.println(e.getMessage());
+                } catch (PlanetManagementException ex) {
+                    System.out.println("There are no planets or jedis with this name.");
                 }
-            } else {
-                throw new UnknownCommandException("Unavailable choice.");
             }
         }
         else if(input.length == 3) {
