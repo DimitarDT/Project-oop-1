@@ -5,8 +5,6 @@ import bg.tu_varna.sit.a1.f23621650.Exceptions.JediManagementException;
 import bg.tu_varna.sit.a1.f23621650.Exceptions.PlanetManagementException;
 import bg.tu_varna.sit.a1.f23621650.Exceptions.UnknownCommandException;
 
-import java.util.Scanner;
-
 public class CommandPrint implements Command {
     private final StarWarsUniverse universe;
 
