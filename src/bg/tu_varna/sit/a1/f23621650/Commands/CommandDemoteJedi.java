@@ -3,6 +3,10 @@ package bg.tu_varna.sit.a1.f23621650.Commands;
 import bg.tu_varna.sit.a1.f23621650.Exceptions.JediManagementException;
 import bg.tu_varna.sit.a1.f23621650.StarWarsUniverse;
 
+/**
+ * Command to demote a Jedi by decreasing their rank and adjusting strength.
+ * Usage: demote_jedi jedi_name multiplier
+ */
 public class CommandDemoteJedi implements Command {
     private final StarWarsUniverse universe;
 
@@ -10,6 +14,11 @@ public class CommandDemoteJedi implements Command {
         this.universe = StarWarsUniverse.getInstance();
     }
 
+    /**
+     * Executes the demote_jedi command.
+     *
+     * @param input command arguments: [command, jedi_name, multiplier]
+     */
     @Override
     public void execute(String[] input) {
         try {

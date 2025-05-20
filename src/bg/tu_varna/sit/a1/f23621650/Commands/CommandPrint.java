@@ -5,6 +5,10 @@ import bg.tu_varna.sit.a1.f23621650.Exceptions.JediManagementException;
 import bg.tu_varna.sit.a1.f23621650.Exceptions.PlanetManagementException;
 import bg.tu_varna.sit.a1.f23621650.Exceptions.UnknownCommandException;
 
+/**
+ * Command to print details about a Jedi or a Planet.
+ * Supports names with spaces enclosed in quotes.
+ */
 public class CommandPrint implements Command {
     private final StarWarsUniverse universe;
 
@@ -12,6 +16,13 @@ public class CommandPrint implements Command {
         this.universe = StarWarsUniverse.getInstance();
     }
 
+    /**
+     * Executes the print command.
+     * @param input Command arguments; expects either:
+     *              - 2 arguments: command and name (jedi or planet)
+     *              - 3 arguments: command and quoted name (e.g. "Jedi Name")
+     * @throws UnknownCommandException if the command format is invalid
+     */
     @Override
     public void execute(String[] input) throws UnknownCommandException {
         if(input.length == 2) {

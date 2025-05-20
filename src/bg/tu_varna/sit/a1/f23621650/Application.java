@@ -2,6 +2,7 @@ package bg.tu_varna.sit.a1.f23621650;
 
 import bg.tu_varna.sit.a1.f23621650.Commands.CLI;
 import bg.tu_varna.sit.a1.f23621650.Commands.CommandLineInterface;
+import bg.tu_varna.sit.a1.f23621650.Enums.JediRank;
 import bg.tu_varna.sit.a1.f23621650.Exceptions.UnknownCommandException;
 
 import java.util.Scanner;
@@ -17,9 +18,9 @@ public class Application {
             starWarsUniverse.addPlanetToUniverse("Kashyyyk");
             starWarsUniverse.addPlanetToUniverse("Alderaan");
 
-            starWarsUniverse.createJedi("Coruscant", "Mace Windu", JediRank.MASTER, 53, "purple", 1.95);
-            starWarsUniverse.createJedi("Coruscant", "Depa Billaba", JediRank.MASTER, 45, "green", 1.7);
-            starWarsUniverse.createJedi("Coruscant", "Cin Drallig", JediRank.BATTLE_MASTER, 50, "green", 1.8);
+            starWarsUniverse.createJedi("Coruscant", "Mace Windu", JediRank.GRAND_MASTER, 53, "purple", 1.95);
+            starWarsUniverse.createJedi("Coruscant", "Depa Billaba", JediRank.GRAND_MASTER, 45, "green", 1.7);
+            starWarsUniverse.createJedi("Coruscant", "Cin Drallig", JediRank.GRAND_MASTER, 50, "green", 1.8);
 
             starWarsUniverse.createJedi("Tatooine", "Anakin Skywalker", JediRank.KNIGHT, 22, "blue", 1.98);
             starWarsUniverse.createJedi("Tatooine", "Luke Skywalker", JediRank.KNIGHT, 23, "green", 1.95);

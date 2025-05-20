@@ -2,7 +2,18 @@ package bg.tu_varna.sit.a1.f23621650.Commands;
 
 import bg.tu_varna.sit.a1.f23621650.Exceptions.UnknownCommandException;
 
+/**
+ * Interface representing a command in the Star Wars Jedi system's CLI.
+ * Provides static methods for printing the application title,
+ * command menu, and help information.
+ * Each implementing class must define the {@link #execute()} method,
+ * which executes the command logic.
+ */
 public interface CLI {
+
+    /**
+     * Prints the Star Wars styled title banner to the console.
+     */
     static void printTitle(){
         System.out.println("\nA long time ago in a galaxy far, far away...\n\n");
         System.out.println("     _______.___________.    ___      .______         ____    __    ____  ___      .______          _______.");
@@ -11,9 +22,12 @@ public interface CLI {
         System.out.println("    \\   \\       |  |      /  /_\\  \\   |      /          \\            / /  /_\\  \\   |      /        \\   \\    ");
         System.out.println(".----)   |      |  |     /  _____  \\  |  |\\  \\----.      \\    /\\    / /  _____  \\  |  |\\  \\----.----)   |   ");
         System.out.println("|_______/       |__|    /__/     \\__\\ | _| `._____|       \\__/  \\__/ /__/     \\__\\ | _| `._____|_______/    ");
-        System.out.println("                                     === THE PROJECT STRIKES BACK ===\n");
+        System.out.println("                                      === THE PROJECT STRIKES BACK ===\n");
     }
 
+    /**
+     * Prints the list of all available commands and their usage formats.
+     */
     static void printMenu(){
         System.out.println("=== COMMAND MENU ===");
         System.out.println("add_planet <planet_name>");
@@ -37,6 +51,9 @@ public interface CLI {
         System.out.println("exit");
     }
 
+    /**
+     * Prints detailed help information describing each command.
+     */
     static void printHelp(){
         System.out.println("=== STAR WARS JEDI SYSTEM - HELP ===");
         System.out.println("Available commands:");
@@ -119,5 +136,10 @@ public interface CLI {
         System.out.println();
     }
 
+    /**
+     * Executes the command.
+     *
+     * @throws UnknownCommandException if the command is not recognized or cannot be executed
+     */
     void execute() throws UnknownCommandException;
 }

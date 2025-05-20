@@ -1,13 +1,26 @@
 package bg.tu_varna.sit.a1.f23621650.Commands;
 
+import bg.tu_varna.sit.a1.f23621650.Enums.CommandEnum;
 import bg.tu_varna.sit.a1.f23621650.Exceptions.UnknownCommandException;
 
 import java.util.Map;
 
+/**
+ * The CommandLineInterface acts as the invoker in the command pattern,
+ * mapping string input to concrete command objects and executing them.
+ * It holds a map of command enums to their implementations, takes
+ * user input, gets the correct command to run, and handles exceptions.
+ */
 public class CommandLineInterface implements CLI{
     private final Map<CommandEnum, Command> commands;
     private final String input;
 
+    /**
+     * Constructs the CLI with the raw input string.
+     * Initializes the command map with all supported commands.
+     *
+     * @param input The full command line input from the user.
+     */
     public CommandLineInterface(String input) {
         this.commands = Map.ofEntries(
                 Map.entry(CommandEnum.ADD_PLANET, new CommandAddPlanet()),
@@ -30,6 +43,14 @@ public class CommandLineInterface implements CLI{
         this.input = input;
     }
 
+    /**
+     * Takes the input, identifies the appropriate command,
+     * and executes it.
+     * Special handling is included for the "planet1 + planet2" input format,
+     * which triggers the PRINT_TWO_PLANETS command.
+     *
+     * @throws UnknownCommandException if the command is unrecognized
+     */
     @Override
     public void execute() throws UnknownCommandException {
         if(input.matches("\\b\\w+\\b\\s*\\+\\s*\\b\\w+\\b")) {

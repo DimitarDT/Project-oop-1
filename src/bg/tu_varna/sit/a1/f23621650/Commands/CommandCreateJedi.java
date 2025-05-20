@@ -1,9 +1,16 @@
 package bg.tu_varna.sit.a1.f23621650.Commands;
 
 import bg.tu_varna.sit.a1.f23621650.*;
+import bg.tu_varna.sit.a1.f23621650.Enums.JediRank;
 import bg.tu_varna.sit.a1.f23621650.Exceptions.JediManagementException;
 import bg.tu_varna.sit.a1.f23621650.Exceptions.PlanetManagementException;
 
+/**
+ * Command to create a Jedi on a specified planet.
+ * Supports Jedi names with one or two words (the latter must be wrapped in quotes).
+ * Usage:
+ *  create_jedi planet_name jedi_name jedi_rank jedi_age saber_color jedi_strength
+ */
 public class CommandCreateJedi implements Command {
     private final StarWarsUniverse universe;
 
@@ -11,6 +18,12 @@ public class CommandCreateJedi implements Command {
         this.universe = StarWarsUniverse.getInstance();
     }
 
+    /**
+     * Executes the create_jedi command.
+     * Supports Jedi names as a single word or two words wrapped in quotes.
+     *
+     * @param input command input tokens
+     */
     @Override
     public void execute(String[] input) {
         try {

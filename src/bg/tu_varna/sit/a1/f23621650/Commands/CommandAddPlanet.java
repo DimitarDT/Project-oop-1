@@ -3,6 +3,10 @@ package bg.tu_varna.sit.a1.f23621650.Commands;
 import bg.tu_varna.sit.a1.f23621650.Exceptions.PlanetManagementException;
 import bg.tu_varna.sit.a1.f23621650.StarWarsUniverse;
 
+/**
+ * Command to add a new planet to the Star Wars universe.
+ * Usage: add_planet planet_name
+ */
 public class CommandAddPlanet implements Command {
     private final StarWarsUniverse universe;
 
@@ -10,6 +14,11 @@ public class CommandAddPlanet implements Command {
         this.universe = StarWarsUniverse.getInstance();
     }
 
+    /**
+     * Executes the add planet command.
+     *
+     * @param input command input tokens, where input[1] should be the planet name.
+     */
     @Override
     public void execute(String[] input) {
         try {

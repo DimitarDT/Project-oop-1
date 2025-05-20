@@ -1,9 +1,15 @@
 package bg.tu_varna.sit.a1.f23621650.Commands;
 
 import bg.tu_varna.sit.a1.f23621650.Exceptions.JediManagementException;
-import bg.tu_varna.sit.a1.f23621650.JediRank;
+import bg.tu_varna.sit.a1.f23621650.Enums.JediRank;
 import bg.tu_varna.sit.a1.f23621650.StarWarsUniverse;
 
+/**
+ * Command to get the most used saber color on a planet, optionally filtered by Jedi rank.
+ * Usage:
+ * - get_most_used_saber_color planet_name
+ * - get_most_used_saber_color planet_name jedi_rank
+ */
 public class CommandGetMostUsedSaberColor implements Command {
     private final StarWarsUniverse universe;
 
@@ -11,6 +17,13 @@ public class CommandGetMostUsedSaberColor implements Command {
         this.universe = StarWarsUniverse.getInstance();
     }
 
+    /**
+     * Executes the get_most_used_saber_color command.
+     *
+     * @param input command arguments:
+     *              [command, planet_name] or
+     *              [command, planet_name, jedi_rank]
+     */
     @Override
     public void execute(String[] input) {
         if(input.length == 2) {
