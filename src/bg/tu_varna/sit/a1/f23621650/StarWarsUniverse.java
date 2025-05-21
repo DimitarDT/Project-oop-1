@@ -301,7 +301,7 @@ public class StarWarsUniverse {
         } catch (EmptyFileException e) {
             setState(new SavedState());
             currentFile = fileName;
-            System.out.println("File opened.");
+            System.out.println(e.getMessage());
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
