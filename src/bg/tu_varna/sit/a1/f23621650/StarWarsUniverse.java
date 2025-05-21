@@ -164,7 +164,12 @@ public class StarWarsUniverse {
      */
     public void getYoungestJedi(String planetName, JediRank jediRank) throws PlanetManagementException, JediManagementException {
         try {
-            System.out.println(state.getYoungestJedi(planetName.toLowerCase(), jediRank));
+            Jedi jedi = state.getYoungestJedi(planetName.toLowerCase(), jediRank);
+            if(jedi == null)
+            {
+                throw new IOException("Jedi " + jediRank + " not found.");
+            }
+            System.out.println(jedi);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
